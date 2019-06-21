@@ -5,6 +5,9 @@
 * [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
 <!-- default file list end -->
 # ASPxGridView - How to cache data on the client side
+<!-- run online -->
+**[[Run Online]](https://codecentral.devexpress.com/e123/)**
+<!-- run online end -->
 
 By default, ASPxGridView does not store all row values on the client side. The client-side **ASPxClientGridView.GetRowValues** method uses callbacks to get them. This example shows how to cache values manually and get them on the client side without callbacks.  
 
