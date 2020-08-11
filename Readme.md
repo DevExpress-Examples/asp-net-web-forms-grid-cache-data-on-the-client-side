@@ -13,7 +13,20 @@ By default, ASPxGridView does not store all row values on the client side. The c
 
 ### Steps to implement:
 
-1) Handle the [ASPxGridView.CustomJSProperties](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse through your grid rows in this event handler and save the desired row values to **e.Properties**. This data will be accessible on the client side.
+1) Handle the [ASPxGridView.CustomJSProperties](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse through your grid rows in this event handler and save the desired row values to **e.Properties**. This data will be accessible on the client side:
+```cs
+protected void grid_CustomJSProperties(object sender, ASPxGridViewClientJSPropertiesEventArgs e) {
+    int startIndex = grid.PageIndex * grid.SettingsPager.PageSize;
+    int end = Math.Min(grid.VisibleRowCount, startIndex + grid.SettingsPager.PageSize);
+    object[] titleId = new object[end - startIndex], titles = new object[end - startIndex];
+    for (int n = startIndex; n < end; n++) {
+        titleId[n - startIndex] = grid.GetRowValues(n, "title_id");
+        titles[n - startIndex] = grid.GetRowValues(n, "title");
+    }
+    e.Properties["cpTitleId"] = titleId;
+    e.Properties["cpTitles"] = titles;
+}
+```
 2) Get the cached data in the following way:
 
 ```js
