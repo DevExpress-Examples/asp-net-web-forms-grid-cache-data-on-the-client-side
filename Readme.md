@@ -3,22 +3,22 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E123)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
 
-* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
-* [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
-<!-- default file list end -->
-# ASPxGridView - How to cache data on the client side
+# Grid View for ASP.NET Web Forms - How to cache data on the client side
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e123/)**
 <!-- run online end -->
 
-By default, ASPxGridView does not store all row values on the client side. The client-side **ASPxClientGridView.GetRowValues** method uses callbacks to get them. This example shows how to cache values manually and get them on the client side without callbacks.  
+This example shows how to cache row values on the client side and access them without a callback to the server.  
 
-### Steps to implement:
+## Implementation Details
 
-1) Handle the [ASPxGridView.CustomJSProperties](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse through your grid rows in this event handler and save the desired row values to **e.Properties**. This data will be accessible on the client side:
+The Grid View control does not store all row values on the client. Because of this, the client-side [`ASPxClientGridView.GetRowValues`](https://docs.devexpress.com/AspNet/js-ASPxClientGridView.GetRowValues(visibleIndex-fieldNames-onCallback)) method sends callbacks to the server to load the values.
+
+Use the steps below to cache the row values on the client:
+
+1) Handle the [`ASPxGridView.CustomJSProperties`](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse the grid rows in this event handler and save the desired row values to `e.Properties`. This data is accessible on the client side:
+
 ```cs
 protected void grid_CustomJSProperties(object sender, ASPxGridViewClientJSPropertiesEventArgs e) {
     int startIndex = grid.PageIndex * grid.SettingsPager.PageSize;
@@ -32,17 +32,27 @@ protected void grid_CustomJSProperties(object sender, ASPxGridViewClientJSProper
     e.Properties["cpTitles"] = titles;
 }
 ```
-2) Get the cached data in the following way:
+
+2) Get the cached data as shown below:
 
 ```js
-  function ProcessRow(index) {
-            alert("The row id is '" + grid.cpTitleId[index - grid.GetTopVisibleIndex()]
-             + "', and title is " + grid.cpTitles[index - grid.GetTopVisibleIndex()]);
-        }
+function ProcessRow(index) {
+    alert(
+        "The row id is '" + grid.cpTitleId[index - grid.GetTopVisibleIndex()]
+        + "', and title is " + grid.cpTitles[index - grid.GetTopVisibleIndex()]
+    );
+}
 ```
 
+## Files to Look At
 
-**See Also:**
-- [How to: Access Server Data on the Client Side](https://documentation.devexpress.com/#AspNet/CustomDocument11816)
+* [Default.aspx](./CS/WebSite/Default.aspx) (VB: [Default.aspx](./VB/WebSite/Default.aspx))
+* [Default.aspx.cs](./CS/WebSite/Default.aspx.cs) (VB: [Default.aspx.vb](./VB/WebSite/Default.aspx.vb))
 
+## Documentation
+- [Passing Values Between Client and Server Sides](https://documentation.devexpress.com/#AspNet/CustomDocument11816)
 
+## More Examples 
+- [Grid View for ASP.NET Web Forms - How to update total summaries on the client side in Batch Edit mode](https://github.com/DevExpress-Examples/aspxgridview-batch-edit-update-total-summaries-on-client)
+- [Grid View for ASP.NET Web Forms - Prevent the cell edit action on the client in batch edit mode](https://github.com/DevExpress-Examples/aspxgridview-prevent-batch-edit-action)
+- [Grid View for ASP.NET Web Forms - How to hide a grid column on the client](https://github.com/DevExpress-Examples/aspxgridview-hide-a-grid-column-on-the-client)
