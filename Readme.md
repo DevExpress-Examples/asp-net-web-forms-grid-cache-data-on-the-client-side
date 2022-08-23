@@ -4,12 +4,12 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 
-# Grid View for ASP.NET Web Forms - How to cache data on the client side
+# Grid View for ASP.NET Web Forms - How to cache data on the client
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e123/)**
 <!-- run online end -->
 
-This example shows how to cache row values on the client side and access them without a callback to the server.  
+This example shows how to cache row values on the client and access them without a callback to the server.  
 
 ## Implementation Details
 
@@ -17,7 +17,7 @@ The Grid View control does not store all row values on the client. Because of th
 
 Use the steps below to cache the row values on the client:
 
-1) Handle the [`ASPxGridView.CustomJSProperties`](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse the grid rows in this event handler and save the desired row values to `e.Properties`. This data is accessible on the client side:
+1) Handle the [`ASPxGridView.CustomJSProperties`](https://documentation.devexpress.com/AspNet/DevExpress.Web.ASPxGridView.CustomJSProperties.event) event. Traverse the grid rows in this event handler and save the row values to `e.Properties`. This data is accessible on the client:
 
 ```cs
 protected void grid_CustomJSProperties(object sender, ASPxGridViewClientJSPropertiesEventArgs e) {
