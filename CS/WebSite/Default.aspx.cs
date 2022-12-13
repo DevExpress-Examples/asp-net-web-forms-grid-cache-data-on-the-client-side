@@ -1,5 +1,5 @@
 using System;
-using DevExpress.Web.ASPxGridView;
+using DevExpress.Web;
 
 public partial class Data_Bind_Control_PassDataOnClient : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {  }
