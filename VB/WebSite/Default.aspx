@@ -1,9 +1,9 @@
 <%-- BeginRegion --%>
 <%@ Page Language="vb" AutoEventWireup="true" CodeFile="Default.aspx.vb" Inherits="Data_Bind_Control_PassDataOnClient" %>
 
-<%@ Register Assembly="DevExpress.Web.v15.1"
+<%@ Register Assembly="DevExpress.Web.v13.1"
 	Namespace="DevExpress.Web" TagPrefix="dxe" %>
-<%@ Register Assembly="DevExpress.Web.v15.1"
+<%@ Register Assembly="DevExpress.Web.v13.1"
 	Namespace="DevExpress.Web" TagPrefix="dxwgv" %>
 
 
